@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калкулатор за ресто</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2e7d32">
+<style>
+body{font-family:Arial;background:#f5f5f5;padding:20px}
+.app{max-width:400px;margin:auto;background:#fff;padding:20px;border-radius:12px}
+input,button{width:100%;padding:10px;margin:8px 0;font-size:18px}
+button{background:#2e7d32;color:#fff;border:none;border-radius:8px}
+.result{font-weight:bold;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="app">
+<h2>Ресто лв ⇄ €</h2>
+<input id="due" type="number" placeholder="Сума (лв)">
+<input id="paid" type="number" placeholder="Платено (лв)">
+<button onclick="calc()">Изчисли</button>
+<div class="result" id="out"></div>
+</div>
+
+<script>
+const rate=1.95583;
+function calc(){
+const d=parseFloat(due.value);
+const p=parseFloat(paid.value);
+if(!d||!p||p<d){out.innerText='Грешни данни';return;}
+const ch=p-d;
+out.innerText=`Ресто: ${ch.toFixed(2)} лв / ${(ch/rate).toFixed(2)} €`;
+}
+if('serviceWorker'in navigator){
+navigator.serviceWorker.register('sw.js');
+}
+</script>
+</body>
+</html>
